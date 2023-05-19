@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import torch
 from sklearn.decomposition import PCA
 
 # data class for TextSpace
@@ -62,6 +61,7 @@ class TextSpaceData:
         # import gpt2 tokenizer and model
         from transformers import GPT2Tokenizer, GPT2Model
         from tensorflow.keras.preprocessing.sequence import pad_sequences
+        import torch
 
         # load tokenizer and model
         tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
