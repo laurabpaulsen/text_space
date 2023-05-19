@@ -13,17 +13,12 @@ To reproduce the results of the example functionality of the package using the d
 ```
 bash setup.sh
 ```
-4. Scrape danish song lyrics from Genius
+4. Run pipeline to:
+    - Scrape danish song lyrics from Genius
+    - Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
+    - Use TextSpace to create 3d visualization of the lyrics (using both emotion and gpt2 embeddings)
 ```
-python src/scrape_songs.py
-```
-5. Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
-```
-python src/preprocess_lyrics.py
-```
-6. Use TextSpace to create 3d visualization of the lyrics (using both emotion and gpt2 embeddings)
-```
-python src/textspace.py
+bash run.sh
 ```
 
 
