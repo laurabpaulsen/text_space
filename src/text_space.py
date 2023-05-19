@@ -14,6 +14,7 @@ from data import TextSpaceData
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv_file", type = str, default="plotly_data.csv")
+    parser.add_argument("--embedding_type", type = str, default="emotion")
 
     return parser.parse_args()
 
@@ -22,19 +23,18 @@ def main():
     path = Path(__file__)
     args = parse_args()
 
-    savepath = path.parents[1] / "data" / "plotly.html"
+    savepath = path.parents[1] / "fig"
 
     # load data
     data = pd.read_csv(path.parents[1] / "data" / args.csv_file)
 
-    for embedding_type in ["gpt2", "emotion"]:
-        # create TextSpaceData object
-        data = TextSpaceData(data, embedding_type=embedding_type)
+    # create TextSpaceData object
+    TextSpace = TextSpaceData(data, embedding_type=args.embedding_type)
 
-        # plot embeddings in 3D
-        fig = plot_embeddings_3d(data)
+    # plot embeddings in 3D
+    fig = plot_embeddings_3d(TextSpace)
 
-        fig.write_html(savepath.parents[0] / f"plotly_{embedding_type}.html")
+    fig.write_html(savepath / f"plotly_{args.embedding_type}.html")
 
 if __name__ == "__main__":
     main()
