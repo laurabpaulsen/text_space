@@ -1,5 +1,6 @@
 """
-Uses the Genius API to scrape lyrics from a list of artists and saves them as separate text files.
+Uses the Genius API to scrape lyrics from a list of danish artists and saves them as separate text files.
+Only songs in danish are saved.
 
 Usage: python src/scrape_songs.py
 
