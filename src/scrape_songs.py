@@ -45,7 +45,6 @@ def get_song_id(artist_id):
             songs += page_songs
             # Increment current_page value for next loop
             current_page += 1
-            print("Page {} finished scraping".format(current_page))
 
         else:
             # If page_songs is empty, quit
@@ -115,7 +114,6 @@ def song_urls(artist_name: str, genius_token: str, n: int = 10):
         if page > 20:
             break
         
-    print('Found {} songs by {}'.format(len(songs), artist_name))
     return songs
 
 def scrape_lyrics(song_url):
@@ -145,14 +143,12 @@ def scrape_lyrics(song_url):
         title = re.sub(r'[^\w\s]', '', title)
 
     except:
-        print('Title not found for {}'.format(song_url))
         return '', ''
 
     # Scrape the song lyrics from the HTML
     try:
         lyrics = html.find("div", class_=re.compile("^lyrics$|Lyrics__Root")).get_text(separator="\n")
     except:
-        print('Lyrics not found for {}'.format(song_url))
         return title, ''
 
     return title, lyrics
@@ -222,7 +218,7 @@ def main_scraper(artists, n_songs, save_path, genius_token):
     -------
     None
     """
-    for artist in tqdm(artists):
+    for artist in tqdm(artists, desc="Artists"):
         titles, lyrics = scrape_songs(artist, genius_token, n_songs)
 
         # replace spaces with underscores
@@ -285,7 +281,7 @@ def main():
         ]
 
     # number of songs to scrape per artist
-    n_songs = 20
+    n_songs = 5
 
     main_scraper(artists, n_songs, output_dir, genius_token)
 
