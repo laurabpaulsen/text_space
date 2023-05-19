@@ -14,27 +14,13 @@ def parse_args():
     return parser.parse_args()
 
 
-
-def load_model(model_name):
-    if model_name.lower() == "gpt2":
-        from transformers import GPT2LMHeadModel, GPT2Tokenizer
-
-        # load tokenizer and model
-        tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-        model = GPT2LMHeadModel.from_pretrained('gpt2')
-
-    elif model_name.lower() == "mt5":
-        from transformers import MT5Tokenizer, MT5ForConditionalGeneration
-
-        tokenizer = MT5Tokenizer.from_pretrained("google/mt5-small")
-        model = MT5ForConditionalGeneration.from_pretrained("google/mt5-small")
-
-    return model, tokenizer
-
 def plot_embeddings_3d(data, savepath = None):
 
     # plotly
-    fig = px.scatter_3d(data, x='x', y='y', z='z', color='author', hover_name='author', hover_data=['text'], text='title')
+    fig = px.scatter_3d(data, x='x', y='y', z='z', 
+                        color='author', hover_name='author', 
+                        hover_data=['text'], text='title',
+                        size_max=10, opacity=0.7)
 
     fig.update_traces(textposition='top center', 
                       hovertemplate='Title: %{text}<br>' +
@@ -44,26 +30,24 @@ def plot_embeddings_3d(data, savepath = None):
     fig.update_layout(
         height=800,
         title_text='TextSpace',
-        font_family="serif"
-    )
-
-    # no bounding box
-    fig.update_layout(
+        font_family="serif",
+        font_size=18,
+        title_font_family="serif",
+        title_font_size=30,
+        legend_title_font_size=20,
+        legend_font_size=16,
         scene = dict(
-            xaxis = dict(showbackground=False, showticklabels=False),
-            yaxis = dict(showbackground=False, showticklabels=False),
-            zaxis = dict(showbackground=False, showticklabels=False)
-            )
+            xaxis_title='x',
+            yaxis_title='y',
+            zaxis_title='z',
+        ),
+        margin=dict(l=0, r=0, b=0, t=0)
     )
     
-    
-    fig.show()
-    if savepath:
-        fig.write_image(savepath)
-    
-        # save html
-        fig.write_html("textspace.html")
 
+    if savepath: 
+        # save html
+        fig.write_html(savepath)
 
 
 def main():
@@ -74,9 +58,8 @@ def main():
     data = pd.read_csv(path.parents[1] / "data" / args.csv_file)
 
     # plot embeddings in 3D
-    plot_embeddings_3d(data, savepath = path.parents[1] / "fig" / "embeddings_3d.png")
+    plot_embeddings_3d(data, savepath = path.parents[1] / "fig" / "embeddings_3d.html")
 
 
 if __name__ == "__main__":
     main()
-                     
