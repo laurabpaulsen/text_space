@@ -2,3 +2,6 @@ env*
 data/*
 # ds store
 .DS_Store
+
+# py cache
+__pycache__/

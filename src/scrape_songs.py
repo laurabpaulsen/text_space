@@ -1,5 +1,9 @@
 """
+Uses the Genius API to scrape lyrics from a list of artists and saves them as separate text files.
 
+Usage: python src/scrape_songs.py
+
+Author: Laura Bock Paulsen (202005791@post.au.dk)
 """
 
 from bs4 import BeautifulSoup
