@@ -111,8 +111,8 @@ def song_urls(artist_name: str, genius_token: str, n: int = 10):
         else:
             page += 1
        
-       # Search through a maximum of 20 pages 
-        if page > 20:
+       # Search through a maximum of 10 pages 
+        if page > 10:
             break
         
     return songs
