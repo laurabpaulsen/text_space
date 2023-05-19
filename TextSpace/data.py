@@ -1,43 +1,58 @@
 import pandas as pd
 import numpy as np
 import torch
-from pathlib import Path
 from sklearn.decomposition import PCA
-
-
 
 # data class for TextSpace
 class TextSpaceData:
     def __init__(self, df, author_col = "author", text_col = "text", title_col = "title", embedding_type = "gpt2"):
+        """
+        The TextSpaceData class is used to prepare data for the TextSpace visualization. It takes a dataframe as input and prepares it for the visualization by extracting the embeddings and performing PCA on them.
+
+        Parameters
+        ----------
+        df : pandas dataframe
+            A pandas dataframe containing the data
+        author_col : str
+            The name of the column containing the author names. Default is "author"
+        text_col : str
+            The name of the column containing the texts. Default is "text"
+        title_col : str
+            The name of the column containing the titles. Default is "title"
+        embedding_type : str
+            The type of embeddings to use. Either 'gpt2' or 'emotion'. Default is 'gpt2'
+        
+        Raises
+        ------
+        ValueError
+            If the dataframe does not contain the specified columns or if the columns contain NaN values
+        """
         self.df = df
         self.author_col = author_col
         self.text_col = text_col
         self.title_col = title_col
         self.embedding_type = embedding_type
 
-
         # check that the dataframe has the correct columns
-        for self.col in [self.author_col, self.text_col, self.title_col]:
-            self._check_col()
+        for col in [self.author_col, self.text_col, self.title_col]:
+            self._check_col(col)
 
         # prepare pca components for plotly visualization
         self.pca = self.get_pca(self.embedding_type)
 
-    def _check_col(self):
+    def _check_col(self, col):
         """
         Checks that the dataframe has the correct columns
         """
-        if self.col not in self.df.columns:
-            raise ValueError(f"Column '{self.col}' not in dataframe")
+        if col not in self.df.columns:
+            raise ValueError(f"Column '{col}' not in dataframe")
+        
+        if self.df[col].isnull().values.any():
+            raise ValueError(f"Column '{col}' contains NaN values")
     
     def get_gpt2_embeddings(self):
         """
         Gets the embeddings for a list of texts using GPT2 model
-
-        Parameters
-        ----------
-        texts : list
-            A list of strings containing the texts to get embeddings for
 
         Returns
         -------
@@ -91,15 +106,20 @@ class TextSpaceData:
                     model="j-hartmann/emotion-english-distilroberta-base", 
                     top_k=None)
 
-        embeddings = []
+        emotion_labels = ['neutral', 'disgust', 'anger', 'fear', 'sadness', 'joy', 'surprise']
+        data = pd.DataFrame(columns = emotion_labels)
 
-        for txt in self.df[self.text_col]:
-            embedding = nlp(txt)[0]["scores"]
-            embeddings.append(embedding)
+        for i, txt in enumerate(self.df[self.text_col]):
+            emotion_scores = nlp(txt[:512])
+
+            # get emotion scores
+            for emotion_score in emotion_scores[0]:
+                data.loc[i, emotion_score['label']] = emotion_score['score']
+
+
+        embeddings = np.array(data)
         
-        embeddings = np.array(embeddings)
-
-        return embeddings
+        return embeddings.transpose()
     
     def get_pca(self, embedding_type, n_components = 3):
         """
