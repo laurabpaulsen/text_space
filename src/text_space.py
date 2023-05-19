@@ -1,22 +1,15 @@
 """
-Uses mt5 as a feature extractor to find similar songs using k-nearest neighbors
+Uses a pretrained model as a feature extractor. PCA is used to reduce the dimensionality of the embeddings to 3D. The 3D embeddings are then plotted using plotly. 
 
 """
-
 import numpy as np
 from pathlib import Path
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import torch
 import re
 import plotly.express as px
-
 from sklearn.decomposition import PCA
-
 import pandas as pd
-
-# knn
-from sklearn.neighbors import NearestNeighbors
-
 import argparse
 
 def parse_args():
@@ -88,21 +81,21 @@ def load_model(model_name):
 
     return model, tokenizer
 
-def plot_embeddings_3d(embeddings, titles, artists, lyrics, savepath = None):
+def plot_embeddings_3d(embeddings, titles, authors, texts, savepath = None):
     pca = PCA(n_components=3)
     embeddings_3d = pca.fit_transform(embeddings)
 
-    lyrics = [lyric[:1000] + "..." for lyric in lyrics]
+    texts = [text[:1000] + "..." for text in texts]
     
     # replace \n with <br> for plotly
-    lyrics = [lyric.replace("\n", "<br>") for lyric in lyrics]
+    texts = [text.replace("\n", "<br>") for text in texts]
 
     # dataframe for plotly
-    data = {'x':embeddings_3d[:,0], 'y':embeddings_3d[:,1], 'z':embeddings_3d[:,2], 'title':titles, 'artist':artists, 'lyrics':lyrics}
+    data = {'x':embeddings_3d[:,0], 'y':embeddings_3d[:,1], 'z':embeddings_3d[:,2], 'title':titles, 'author':authors, 'text':texts}
     df = pd.DataFrame(data)
 
     # plotly
-    fig = px.scatter_3d(df, x='x', y='y', z='z', color='artist', hover_name='artist', hover_data=['lyrics'], text='title')
+    fig = px.scatter_3d(df, x='x', y='y', z='z', color='author', hover_name='author', hover_data=['text'], text='title')
 
     fig.update_traces(textposition='top center', 
                       hovertemplate='Title: %{text}<br>' +
@@ -180,7 +173,7 @@ def main():
     titles = [title.replace("-"," - ") for title in titles]
 
     # plot embeddings in 3D
-    plot_embeddings_3d(embeddings, titles, artists, lyrics, savepath = path.parents[1] / "plots" / "embeddings_3d.png")
+    plot_embeddings_3d(embeddings, titles, artists, lyrics, savepath = path.parents[1] / "fig" / "embeddings_3d.png")
 
 
 if __name__ == "__main__":
