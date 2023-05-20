@@ -250,35 +250,8 @@ def main():
 
     # artists to scrape
     artists = [
-        "Specktors", "Gilli", "Flødeklinikken", "Klumben", "Rent mel",
-        "PIND", "UNG-SKAB", "BJØRN", "JOSVA", "KIDD", "Jimilian", "KATO",
-        "Cyd Williams",  "Franske piger", "EaggerStunn", "Danser med piger", "Hong Kong",
-        "Uro", "Mekdes", "Olivver", "Malte Ebert", "Thor Farlov",  "Xander Linnet",
-        "Mas", "knægt", "Marcus.wav", "Angående mig", "FRAADS", "Fastpoholmen", "Iiris",
-        "Malk De Koijn", "Jooks", "Den gale pose", "Per Vers","UFO yepha", "Johnson", "USO",
-        "Andreas Odbjerg", "Kim Larsen", "Sanne Salomonsen", "Thomas Helmig", "Lis Sørensen", 
-        "The Minds Of 99", "Medina", "Burhan G", "Peter Sommer", "Katinka Band", "Tessa", 
-        "De Danske Hyrder", "Thomas Buttenschøn", "Rigmor", "Marie Key", "Nephew", 
-        "Magtens Korridorer", "Bogfinkevej", "Tobias Rahim",  "Ukendt Kunstner",
-        "Guldimund", "Ulige numre", "Gulddreng", "Pharfar",  "Natasja", "Iomfro",
-        "Benjamin Hav", "Benal", "KESI", "Rasmus Seebach", "Søren Huss", "Barselona",
-        "Carl Emil Petersen", "Karl William", "Danseorkesteret", "Kim Larsen", "Hjalmer",  
-        "Folkeklubben", "Sys Bjerre", "C.V. Jørgensen", "Mads Langer", "Shaka Loveless",
-        "Emil Kruse", "TopGunn", "Citybois", "Joey Moe",  "Jokeren", "Blak", "Hans Philip",
-        "Anne Linnet", "Lars Lilholt Band", "Shu-Bi-Dua", "Tim Christensen", "Lizzie", 
-        "Hej Matematik", "Medina", "Anna David",  "Johnny Deluxe", "Rasmus Walter",
-        "Gnags", "John Mogensen", "Suspekt", "guldimund", "Gasolin",  "Tøsedrengene", 
-        "Poul Krebs", "Blæst",  "Tue West", "Suspekt", "Szhirley", "Brødrene Olsen",
-        "Ray Dee Ohh", "Back to Back", "Dodo & the Dodos",  "Bamses Venner", "Tørfisk",
-        "Jakob Sveistrup", "Rocazino", "Danser med Drenge", "Laban", "Tommy Seebach",
-        "Panamah", "Tobias Rahim", "Birthe Kjær", "Jung", "Zar Paulo", "PATINA", "Joyce", 
-        "Kalaset", "Statisk", "Pauline", "Dusin", "Liss", "Kind mod kind", "Annika Aakjær", 
-        "Lars H.U.G.", "Sort sol", "Juncker","Undertekst", "Love shop", "Claus Hempler",
-        "Pil", "Simon Kvamm", "Niels Brandt", "Ussel", "Hugorm" , "Artigeardit",
-        "Lord Siva", "Sivas", "Emil Stabil", "ude af kontrol", "Page Four", "Gulddreng",
-        "Vild Smith", "Molo", "Soleima", "Bisse", "De eneste to", "Mikael Simpson", 
-        "Hymns from Nineveh", "Rasmus Nøhr", "Big Fat Snake", "Caroline Henderson", "Søs Fenger",
-        "Stig Rossen", "Niarn", "Østkyst Hustlers",  "Jøden", "Clemens", "Raske Penge"
+        "Kim Larsen", "Sanne Salomonsen", "Anne Linnet", "Lis Sørensen", 
+        "The Minds Of 99", "Medina", "Zar Paulo", "Nephew","Guldimund", "Ukendt Kunstner"
         ]
 
     # number of songs to scrape per artist
