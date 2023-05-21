@@ -7,7 +7,7 @@ import pandas as pd
 import argparse
 
 import sys
-sys.path.append(str(Path(__file__).parents[1] / "TextSpace")) 
+sys.path.append(str(Path(__file__).parents[2] / "TextSpace")) 
 from plot3D import plot_embeddings_3d
 from data import TextSpaceData
 
@@ -23,18 +23,18 @@ def main():
     path = Path(__file__)
     args = parse_args()
 
-    savepath = path.parents[2] / "fig"
+    savepath = path.parents[1] 
 
     # load data
     data = pd.read_csv(path.parents[2] / "data" / args.csv_file)
+    for embedding_type in ["emotion", "gpt2"]:
+        # create TextSpaceData object
+        TextSpace = TextSpaceData(data, embedding_type=embedding_type)
 
-    # create TextSpaceData object
-    TextSpace = TextSpaceData(data, embedding_type=args.embedding_type)
+        # plot embeddings in 3D
+        fig = plot_embeddings_3d(TextSpace)
 
-    # plot embeddings in 3D
-    fig = plot_embeddings_3d(TextSpace)
-
-    fig.write_html(savepath / f"plotly_{args.embedding_type}.html")
+        fig.write_html(savepath / f"plotly_{embedding_type}.html")
 
 if __name__ == "__main__":
     main()
