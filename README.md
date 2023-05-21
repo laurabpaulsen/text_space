@@ -72,3 +72,4 @@ To display the results of the example functionality of the package using the dan
 - [Emotion Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_emotion.html)
 - [GPT2 Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_gpt2.html)
 - [BoW Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_bow.html)
+- [Latent dirichlet allocation](http://htmlpreview.github.io/??https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_topic.html)

@@ -27,7 +27,7 @@ def main():
 
     # load data
     data = pd.read_csv(path.parents[2] / "data" / args.csv_file)
-    for embedding_type in ["bow", "emotion", "gpt2"]:
+    for embedding_type in ["topic", "bow", "emotion", "gpt2"]:
         # create TextSpaceData object
         TextSpace = TextSpaceData(data, embedding_type=embedding_type)
 

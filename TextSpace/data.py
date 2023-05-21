@@ -4,7 +4,7 @@ from sklearn.decomposition import PCA
 
 # data class for TextSpace
 class TextSpaceData:
-    def __init__(self, df, author_col = "author", text_col = "text", title_col = "title", embedding_type = "gpt2"):
+    def __init__(self, df, author_col = "author", text_col = "text_full", title_col = "title", embedding_type = "gpt2"):
         """
         The TextSpaceData class is used to prepare data for the TextSpace visualization. It takes a dataframe as input and prepares it for the visualization by extracting the embeddings and performing PCA on them.
 
@@ -19,7 +19,7 @@ class TextSpaceData:
         title_col : str
             The name of the column containing the titles. Default is "title"
         embedding_type : str
-            The type of embeddings to use. Either 'gpt2' or 'emotion'. Default is 'gpt2'
+            The type of embeddings to use. Either 'gpt2', 'emotion' or 'bow'. Default is 'gpt2'
         
         Raises
         ------
@@ -49,6 +49,7 @@ class TextSpaceData:
         if self.df[col].isnull().values.any():
             raise ValueError(f"Column '{col}' contains NaN values")
     
+
     def get_gpt2_embeddings(self):
         """
         Gets the embeddings for a list of texts using GPT2 model
@@ -94,7 +95,7 @@ class TextSpaceData:
         # convert list of embeddings to numpy array
         embeddings = np.array(embeddings)
 
-        return embeddings
+        return embeddings.transpose()
     
     def get_emotion_embeddings(self):
         """
@@ -141,7 +142,37 @@ class TextSpaceData:
         # convert to numpy array
         embeddings = embeddings.toarray()
 
-        return embeddings
+        return embeddings.transpose()
+    
+    def get_topic_embeddings(self):
+        """
+        Gets the embeddings for a list of texts using topic modelling
+
+        Returns
+        -------
+        embeddings : numpy array
+            A numpy array containing the embeddings for the texts
+        """
+        from sklearn.feature_extraction.text import CountVectorizer
+        from sklearn.decomposition import LatentDirichletAllocation
+
+        # initialize count vectorizer
+        vectorizer = CountVectorizer()
+
+        # fit and transform texts
+        embeddings = vectorizer.fit_transform(self.df[self.text_col])
+
+        # initialize lda
+        lda = LatentDirichletAllocation(n_components=12)
+
+        # fit lda
+        lda.fit(embeddings)
+
+        # get embeddings
+        embeddings = lda.transform(embeddings)
+
+
+        return embeddings.transpose()
     
     def get_pca(self, embedding_type, n_components = 3):
         """
@@ -165,9 +196,11 @@ class TextSpaceData:
             embeddings = self.get_emotion_embeddings()
         elif embedding_type == "bow":
             embeddings = self.get_bow_embeddings()
+        elif embedding_type == "topic":
+            embeddings = self.get_topic_embeddings()
         else:
-            raise ValueError("embedding_type must be either 'gpt2' or 'emotion'")
-        
+            raise ValueError("embedding_type must be either 'gpt2', 'emotion', 'bow' or 'topic'")
+        print(embeddings.shape)
         pca = PCA(n_components = n_components)
         pca.fit(embeddings)
 
