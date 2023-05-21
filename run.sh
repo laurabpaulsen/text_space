@@ -1,5 +1,5 @@
 # activate environment
-source ./env/bin/activate
+#source ./env/bin/activate
 
 # scrape songs
 echo "[INFO]: Scraping danish song lyrics..."

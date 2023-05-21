@@ -9,10 +9,15 @@ def plot_embeddings_3d(data:TextSpaceData):
                         size_max=10, opacity=0.7)
 
     fig.update_traces(textposition='top center')
+
+    # only show the title when hovering over a point (not the author or the coordinates)
+    fig.update_traces(hovertemplate="<b>%{text}</b><br><br>",
+                        selector=dict(type='scatter3d')) 
+    fig.update_layout(hoverlabel=dict(bgcolor="white", font_size=16, font_family="serif"))
+
     
     fig.update_layout(
         height=800,
-        title_text="TextSpace" + " " + data.embedding_type,
         font_family="serif",
         font_size=18,
         title_font_family="serif",

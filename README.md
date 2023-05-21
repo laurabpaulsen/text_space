@@ -1,8 +1,9 @@
 # TextSpace
-This repository holds the code for the 5th and final project for Language Analytics (S2023). It contains a local Python package called `TextSpace` which allows for interactive exploration of a corpus of text documents.
+This repository holds the code for the 5th and final project for Language Analytics (S2023). It contains a local Python package called `TextSpace` which allows for interactive exploration of a corpus of text documents. Futhermore it contains a demo of the package using a corpus of danish song lyrics, as well as a script for initialising a dash app for visualizing the embeddings of the lyrics.
 
+![](examples/example.gif)
 ## Description of the data
-To demonstrate the functionality of the package as collection of lyrics from danish songs were scraped from Genius.com.
+To demonstrate the functionality of the package as collection of lyrics from danish songs from 10 artists were scraped from Genius.com.
 
 ## Usage and reproducibility
 To reproduce the results of the example functionality of the package using the danish songs, follow the steps below. All terminal commands should be run from the root directory of the repository.
@@ -21,6 +22,11 @@ bash setup.sh
 bash run.sh
 ```
 
+5. To run the dash app, run the following command
+```
+source env/bin/activate
+python src/dash_app.py
+```
 
 ## Repository structure
 
