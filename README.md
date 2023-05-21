@@ -25,7 +25,7 @@ bash run.sh
 5. To run the dash app, run the following command
 ```
 source env/bin/activate
-python src/dash_app.py
+python examples/src/dash_app.py
 ```
 
 
