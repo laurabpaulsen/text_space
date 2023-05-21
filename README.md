@@ -35,9 +35,9 @@ If you want to display the embeddings of your own corpus, you can do so by simpl
 - author
 - text_full
 
-The `text_full` column should contain the full text of the document, while the `title` and `author` columns should contain the title and author of the document respectively. The `title` and `author` columns are used for labeling the documents in the visualization. The `text_full` column is used for calculating the embeddings. The `text_full` column should be a string.
+The `text_full` column should contain the full text of the document, while the `title` and `author` columns should contain the title and author of the document respectively. The `title` and `author` columns are used for labeling the documents in the visualization. The `text_full` column is used for calculating the embeddings. All columns should contain strings.
 
-Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you can both run the `run.sh` script or the `dash_app.py` script to visualize the embeddings of your own corpus.
+Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you can both run `run.sh` or the `dash_app.py` script to visualize the embeddings of your own corpus.
 
 ## Repository structure
 ```
@@ -68,6 +68,7 @@ Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you
 
 
 ## Results
-To display the emotion embeddings, follow this [link](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_emotion.html)
-To display the gpt2 embeddings, follow this [link](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_gpt2.html)
-To display the bow embeddings, follow this [link](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_bow.html)
+To display the results of the example functionality of the package using the danish songs, follow the following links:
+- [Emotion Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_emotion.html)
+- [GPT2 Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_gpt2.html)
+- [BoW Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_bow.html)
