@@ -120,6 +120,28 @@ class TextSpaceData:
         embeddings = np.array(data)
         
         return embeddings.transpose()
+
+    def get_bow_embeddings(self):
+        """
+        Gets the embeddings for a list of texts using bag-of-words
+
+        Returns
+        -------
+        embeddings : numpy array
+            A numpy array containing the embeddings for the texts
+        """
+        from sklearn.feature_extraction.text import CountVectorizer
+
+        # initialize count vectorizer
+        vectorizer = CountVectorizer()
+
+        # fit and transform texts
+        embeddings = vectorizer.fit_transform(self.df[self.text_col])
+
+        # convert to numpy array
+        embeddings = embeddings.toarray()
+
+        return embeddings
     
     def get_pca(self, embedding_type, n_components = 3):
         """
@@ -141,6 +163,8 @@ class TextSpaceData:
             embeddings = self.get_gpt2_embeddings()
         elif embedding_type == "emotion":
             embeddings = self.get_emotion_embeddings()
+        elif embedding_type == "bow":
+            embeddings = self.get_bow_embeddings()
         else:
             raise ValueError("embedding_type must be either 'gpt2' or 'emotion'")
         
