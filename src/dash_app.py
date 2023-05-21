@@ -2,7 +2,9 @@
 Using Dash to create a web app for the project
 """
 
-from dash import Dash, html, dash_table, dcc, dependencies, Output, Input
+from dash import Dash, html, dcc, Output, Input
+import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import load_figure_template
 import pandas as pd
 from pathlib import Path
 
@@ -16,8 +18,9 @@ path = Path(__file__)
 # read plotly data
 df = pd.read_csv(path.parents[1] / 'data' / 'plotly_data.csv')
 
+load_figure_template("LUX")
 # only few points for testing
-#df = df.sample(5)
+df = df.sample(10)
 
 # create TextSpaceData object
 TextSpace_emotion = TextSpaceData(df, embedding_type="emotion")
@@ -26,46 +29,77 @@ TextSpace_gpt2 = TextSpaceData(df, embedding_type="gpt2")
 fig_gpt2 = plot_embeddings_3d(TextSpace_gpt2)
 
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = Dash(__name__, external_stylesheets=external_stylesheets)
+app = Dash(external_stylesheets=[dbc.themes.LUX])
 
+SIDEBAR_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "width": "25rem",
+    "padding": "2rem 1rem",
+    "background-color": "#ABD699",
+}
+
+sidebar = html.Div(
+    [
+        html.H2("Embedding type"),
+        html.Hr(),
+
+        dbc.Nav(
+            [
+                dcc.Dropdown(id="embedding-type",
+                    options=[
+                        {'label': 'Emotion', 'value': 'emotion'},
+                        {'label': 'GPT2', 'value': 'gpt2'}
+                    ],
+                    value='emotion',
+                    clearable=False,
+                    style={'width': '100%'}
+                ),
+            ],
+            vertical=True,
+            pills=True,
+        ),
+    ],
+    style=SIDEBAR_STYLE,
+)
 
 app.layout = html.Div([
-    html.Div(className='row', children='TextSpace'),
-
-    html.Hr(),
-
-    dcc.RadioItems(
-        id='embedding-type',
-        options=[
-            "emotion", "gpt2"
-        ],
-        value='emotion'
-    ),
-
-    html.Div(className='row', children = [
-        html.Div(className='eight columns', children = [
-            dcc.Graph(
-                id='3d-plot',
-                figure={})
-            ]),
-
-        dcc.RadioItems(
-            id="chosen-point",
-            options=[],
-            value=[]
+    dbc.Row(
+        dbc.Col(
+            html.H2("TextSpace", className="text-center"),
+            width=12)
         ),
+
+    dbc.Row(
+            [dbc.Col(sidebar, width=3),
+            # insert the graph here
+            dbc.Col(dcc.Graph(id='3d-plot',figure={}), width=9),
         
-        # a bit less wide than the graph
-        html.Div(className='four columns', children = [
+            #
+            dcc.RadioItems(id="chosen-point",options=[],value=[]),
+
+            ]
+        ),
+    
+
+    
+    # new row for displaying the lyrics
+    dbc.Row(
+        dbc.Col(
             dcc.Textarea(
                 id="lyrics",
                 value="Click on a point to see the text",
-                style={'width': '100%', 'height': 700, 'font-size': 20, 'font-family': 'serif'})
-        ]),
+                readOnly=True,
+                style={'font-size': 20, 'border': 'none','outline': 'none','background-color': '#f5f5f5'}))
+        )
+    
 
     ])
-])
+
+
+
 
 
 @app.callback(
@@ -97,6 +131,10 @@ def update_table(clickData):
 
         return_text = title + "\n\n" + full_text
         return return_text
+    
 
 if __name__ == '__main__':
+    print("Running Dash app...")
+    print("Go to the link provided in the terminal when the app is done opening.")
+    print("Press CTRL+C to stop the app.")
     app.run_server(debug=True)
