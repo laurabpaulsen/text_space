@@ -19,7 +19,7 @@ class TextSpaceData:
         title_col : str
             The name of the column containing the titles. Default is "title"
         embedding_type : str
-            The type of embeddings to use. Either 'gpt2', 'emotion' or 'bow'. Default is 'gpt2'
+            The type of embeddings to use. Either 'gpt2', 'emotion', 'topic' or 'bow'. Default is 'gpt2'
         
         Raises
         ------
@@ -200,7 +200,7 @@ class TextSpaceData:
             embeddings = self.get_topic_embeddings()
         else:
             raise ValueError("embedding_type must be either 'gpt2', 'emotion', 'bow' or 'topic'")
-        print(embeddings.shape)
+        
         pca = PCA(n_components = n_components)
         pca.fit(embeddings)
 
