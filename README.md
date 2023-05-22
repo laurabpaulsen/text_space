@@ -33,7 +33,7 @@ bash setup.sh
     - Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
     - Use TextSpace to create 3d visualization of the lyrics using BoW, GPT2 and emotion embeddings
 
-As the repository holds all the files created from you can skip this step if you just want to run the dash app.
+**Note:** As the repository holds all the files created by running the script you can skip this step if you just want to run the dash app.
 ```
 bash run.sh
 ```
