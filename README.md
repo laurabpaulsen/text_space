@@ -2,6 +2,7 @@
 This repository holds the code for the 5th and final project for Language Analytics (S2023). It contains a local Python package called `TextSpace` which allows for interactive exploration of a corpus of text documents. Futhermore it contains a demo of the package using a corpus of danish song lyrics, as well as a script for initialising a dash app for interactive exploration of the lyrics in embedding space projected unto 3 principal components.
 
 ![](examples/example.gif)
+
 ## Description of the data
 To demonstrate the functionality of the package as collection of lyrics from danish songs from 10 artists were scraped from Genius.com. Up to 5 songs from each artist were scraped, but only the danish songs were saved. 
 
@@ -27,10 +28,12 @@ To reproduce the results of the example functionality of the package using the d
 ```
 bash setup.sh
 ```
-4. Run the `run.sh` script to:
+4. Run the `run.sh` script to: 
     - Scrape danish song lyrics from Genius
     - Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
     - Use TextSpace to create 3d visualization of the lyrics using BoW, GPT2 and emotion embeddings
+
+As the repository holds all the files created from you can skip this step if you just want to run the dash app.
 ```
 bash run.sh
 ```
@@ -76,7 +79,6 @@ Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you
 ├── run.sh
 ├── setup.sh
 └── TOKEN.txt                                   <- Remember to add your own Genius API key
-
 ```
 
 
@@ -86,3 +88,7 @@ To display the results of the example functionality of the package using the dan
 - [GPT2 Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_gpt2.html)
 - [BoW Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_bow.html)
 - [Latent dirichlet allocation](http://htmlpreview.github.io/??https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_topic.html)
+
+These can also be found in the `examples` folder of the repository. 
+
+Additionally the dash app provides an interactive way of exploring the corpus. It allows you to switch seemlessly between the types of embeddings and display the full text by clicking the songs. 
