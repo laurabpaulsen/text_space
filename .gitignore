@@ -4,3 +4,5 @@ env*
 
 # py cache
 __pycache__/
+
+docs/

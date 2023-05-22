@@ -13,6 +13,8 @@ sys.path.append(str(Path(__file__).parents[2] / "TextSpace"))
 from plot3D import plot_embeddings_3d
 from data import TextSpaceData
 
+import os
+
 
 path = Path(__file__)
 # read plotly data
@@ -23,15 +25,17 @@ load_figure_template("LUX")
 # create TextSpaceData object
 TextSpace_emotion = TextSpaceData(df, embedding_type="emotion")
 fig_emotion = plot_embeddings_3d(TextSpace_emotion)
-TextSpace_gpt2 = TextSpaceData(df, embedding_type="gpt2")
-fig_gpt2 = plot_embeddings_3d(TextSpace_gpt2)
-TextSpace_bow = TextSpaceData(df, embedding_type="bow")
-fig_bow = plot_embeddings_3d(TextSpace_bow)
-TextSpace_topic = TextSpaceData(df, embedding_type="topic")
-fig_topic = plot_embeddings_3d(TextSpace_topic)
+#TextSpace_gpt2 = TextSpaceData(df, embedding_type="gpt2")
+#fig_gpt2 = plot_embeddings_3d(TextSpace_gpt2)
+#TextSpace_bow = TextSpaceData(df, embedding_type="bow")
+#fig_bow = plot_embeddings_3d(TextSpace_bow)
+#TextSpace_topic = TextSpaceData(df, embedding_type="topic")
+#fig_topic = plot_embeddings_3d(TextSpace_topic)
 
 
 app = Dash(external_stylesheets=[dbc.themes.LUX])
+app.scripts.config.serve_locally = True
+app.css.config.serve_locally = True
 
 SIDEBAR_STYLE = {
     "position": "fixed",
@@ -149,6 +153,9 @@ def update_text(clickData):
         return_text = title + "\n\n" + full_text
         return return_text
     
+
+
+
 
 if __name__ == '__main__':
     print("Running Dash app...")
