@@ -102,7 +102,7 @@ def main():
     df = pd.DataFrame(data)
 
     # save dataframe
-    df.to_csv(path.parents[1] / "data" / "plotly_data.csv", index=False)
+    df.to_csv(path.parents[2] / "data" / "plotly_data.csv", index=False)
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ import pandas as pd
 from pathlib import Path
 
 import sys
-sys.path.append(str(Path(__file__).parents[1] / "TextSpace")) 
+sys.path.append(str(Path(__file__).parents[2] / "TextSpace")) 
 from plot3D import plot_embeddings_3d
 from data import TextSpaceData
 
@@ -25,6 +25,10 @@ TextSpace_emotion = TextSpaceData(df, embedding_type="emotion")
 fig_emotion = plot_embeddings_3d(TextSpace_emotion)
 TextSpace_gpt2 = TextSpaceData(df, embedding_type="gpt2")
 fig_gpt2 = plot_embeddings_3d(TextSpace_gpt2)
+TextSpace_bow = TextSpaceData(df, embedding_type="bow")
+fig_bow = plot_embeddings_3d(TextSpace_bow)
+TextSpace_topic = TextSpaceData(df, embedding_type="topic")
+fig_topic = plot_embeddings_3d(TextSpace_topic)
 
 
 app = Dash(external_stylesheets=[dbc.themes.LUX])
@@ -49,7 +53,9 @@ sidebar = html.Div(
                 dcc.Dropdown(id="embedding-type",
                     options=[
                         {'label': 'Emotion', 'value': 'emotion'},
-                        {'label': 'GPT2', 'value': 'gpt2'}
+                        {'label': 'GPT2', 'value': 'gpt2'},
+                        {'label': 'Bag of words', 'value': 'bow'},
+                        {'label': 'Latent Dirichlet Allocation', 'value': 'topic'}
                     ],
                     value='emotion',
                     clearable=False,
@@ -119,11 +125,13 @@ app.layout = html.Div([
 def update_plot(embedding_type):
     if embedding_type == "emotion":
         return fig_emotion
+    elif embedding_type == "bow":
+        return fig_bow
+    elif embedding_type == "topic":
+        return fig_topic
     else:
         return fig_gpt2
 
-# callback for table
-# when clicking on a point, show the lyrics of that song in a table
 @app.callback(
     Output('text-area', 'value'),
     Input('3d-plot', 'clickData')
