@@ -244,7 +244,7 @@ def main():
         output_dir.mkdir(parents=True)
 
     # get token from txt
-    with open(path.parents[2] / "TOKEN.txt") as f:
+    with open(path.parents[1] / "TOKEN.txt") as f:
         genius_token = f.read()
 
 

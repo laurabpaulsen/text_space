@@ -25,51 +25,13 @@ bash run.sh
 5. To run the dash app, run the following command
 ```
 source env/bin/activate
-python examples/src/dash_app.py
+python src/dash_app.py
 ```
-
-
-### Using your own corpus
-If you want to display the embeddings of your own corpus, you can do so by simply providing a dataframe with the following columns:
-- title
-- author
-- text_full
-
-The `text_full` column should contain the full text of the document, while the `title` and `author` columns should contain the title and author of the document respectively. The `title` and `author` columns are used for labeling the documents in the visualization. The `text_full` column is used for calculating the embeddings. All columns should contain strings.
-
-Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you can both run `run.sh` or the `dash_app.py` script to visualize the embeddings of your own corpus.
 
 ## Repository structure
-```
-├── data 
-│   ├── plotly_data.csv
-│   ├── lyrics
-│   │   ├── Anne_Linnet-Barndommens_Gade.txt
-│   │   └── ...
-├── env                                         <- Not included in repo
-├── examples
-│   ├── src
-│   │   ├── dash_app.py
-│   │   └── ...
-│   ├── plotly_bow.html
-│   └── ...
-├── TextSpace                                   <- Local python package
-│   ├── __init__.py
-│   ├── data.py
-│   └── plot3D.py
-├── .gitignore
-├── README.md
-├── requirements.txt
-├── run.sh
-├── setup.sh
-└── TOKEN.txt                                   <- Remember to add your own Genius API key
-
-```
 
 
 ## Results
-To display the results of the example functionality of the package using the danish songs, follow the following links:
-- [Emotion Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_emotion.html)
-- [GPT2 Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_gpt2.html)
-- [BoW Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_bow.html)
-- [Latent dirichlet allocation](http://htmlpreview.github.io/??https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_topic.html)
+
+To display the emotion embeddings, follow this [link]()
+To display the gpt2 embeddings, follow this [link]()

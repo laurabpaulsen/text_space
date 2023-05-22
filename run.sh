@@ -3,17 +3,17 @@
 
 # scrape songs
 echo "[INFO]: Scraping danish song lyrics..."
-python examples/src/scrape_songs.py
+python src/scrape_songs.py
 
 # preprocess songs
 echo "[INFO]: Preparing dataframe with song lyrics..."
-python examples/src/preprocess_lyrics.py
+python src/preprocess_lyrics.py
 
 # Use TextSpace to create 3d visualization of the lyrics (using both emotion and gpt2 embeddings)
 embeddings="emotion gpt2"
 for embedding in $embeddings; do
 echo "[INFO]:Creating 3d visualization of the lyrics using $embedding embeddings..."
-    python examples/src/text_space.py --embedding_type $embedding
+    python src/text_space.py --embedding_type $embedding
 done
 
 
