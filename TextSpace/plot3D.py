@@ -33,7 +33,5 @@ def plot_embeddings_3d(data:TextSpaceData):
             )
 
     )
-
-
     
     return fig
