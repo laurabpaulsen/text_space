@@ -5,7 +5,6 @@ import pandas as pd
 
 from plot3D import plot_embeddings_3d
 from data import TextSpaceData
-
 from pathlib import Path
 
 def prep_data_dash(data_path:Path):
@@ -83,9 +82,6 @@ def get_dash_app(data_path=None):
 
 
     app = Dash(external_stylesheets=[dbc.themes.LUX])
-
-    # solve issue with files not being available when using ucloud
-    
 
     SIDEBAR_STYLE = {
         "position": "fixed",
