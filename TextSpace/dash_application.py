@@ -83,8 +83,9 @@ def get_dash_app(data_path=None):
 
 
     app = Dash(external_stylesheets=[dbc.themes.LUX])
-    app.scripts.config.serve_locally = True
-    app.css.config.serve_locally = True
+
+    # solve issue with files not being available when using ucloud
+    
 
     SIDEBAR_STYLE = {
         "position": "fixed",
