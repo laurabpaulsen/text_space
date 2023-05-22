@@ -90,20 +90,6 @@ sidebar = html.Div(
 )
 
 
-textarea  = html.Div(
-    [
-        html.H4("Text"),
-        html.Hr(),
-        dcc.Textarea(
-            id="text-area",
-            value="Click on a point to view the text",
-            readOnly=True,
-            draggable=True,
-            style={'width': '100%', 'height': 500}
-        )
-    ]
-)
-
 app.layout = html.Div([
     dbc.Row(
         dbc.Col(
