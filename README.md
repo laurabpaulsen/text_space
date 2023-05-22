@@ -1,9 +1,22 @@
 # TextSpace
-This repository holds the code for the 5th and final project for Language Analytics (S2023). It contains a local Python package called `TextSpace` which allows for interactive exploration of a corpus of text documents. Futhermore it contains a demo of the package using a corpus of danish song lyrics, as well as a script for initialising a dash app for visualizing the embeddings of the lyrics.
+This repository holds the code for the 5th and final project for Language Analytics (S2023). It contains a local Python package called `TextSpace` which allows for interactive exploration of a corpus of text documents. Futhermore it contains a demo of the package using a corpus of danish song lyrics, as well as a script for initialising a dash app for interactive exploration of the lyrics in embedding space projected unto 3 principal components.
 
 ![](examples/example.gif)
 ## Description of the data
-To demonstrate the functionality of the package as collection of lyrics from danish songs from 10 artists were scraped from Genius.com.
+To demonstrate the functionality of the package as collection of lyrics from danish songs from 10 artists were scraped from Genius.com. Up to 5 songs from each artist were scraped, but only the danish songs were saved. 
+
+| Artist | Number of songs |
+| ----------------- | -: |
+| Anne Linnet       | 5 |
+| Kim Larsen        | 5 |
+| Guldimund         | 5 |
+| Lis Sørensen      | 4 |
+| Medina            | 3 |
+| Nephew            | 3 |
+| Sannne Salomonsen | 5 |
+| The Minds of 99   | 4 |
+| Zar Paulo         | 5 |
+| **Total**         | **39**|
 
 ## Usage and reproducibility
 To reproduce the results of the example functionality of the package using the danish songs, follow the steps below. All terminal commands should be run from the root directory of the repository.
@@ -17,7 +30,7 @@ bash setup.sh
 4. Run the `run.sh` script to:
     - Scrape danish song lyrics from Genius
     - Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
-    - Use TextSpace to create 3d visualization of the lyrics (using both emotion and gpt2 embeddings)
+    - Use TextSpace to create 3d visualization of the lyrics using BoW, GPT2 and emotion embeddings
 ```
 bash run.sh
 ```
