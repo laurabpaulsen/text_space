@@ -20,6 +20,9 @@ To demonstrate the functionality of the package as collection of lyrics from dan
 | **Total**         | **39**|
 
 ## Usage and reproducibility
+The code was developed and tested on a MacBook Pro with macOS (Ventura v3.3., python v3.10.7). Furhermore, the pipeline was tested on [uCloud](https://cloud.sdu.dk/app/dashboard) (Ubuntu v22.10m, Coder python v1.77.3, python v3.10.7). Here all code runs as expected, except for the dash app which does not connect correctly to the host.
+
+
 To reproduce the results of the example functionality of the package using the danish songs, follow the steps below. All terminal commands should be run from the root directory of the repository.
 
 1. Clone the repository
@@ -31,9 +34,9 @@ bash setup.sh
 4. Run the `run.sh` script to: 
     - Scrape danish song lyrics from Genius
     - Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
-    - Use TextSpace to create 3d visualization of the lyrics using BoW, GPT2 and emotion embeddings
+    - Use TextSpace to create 3d visualization of the lyrics using BoW, GPT2, latent dirichlet allocation and emotion embeddings
 
-**Note:** As the repository holds all the files created by running the script you can skip this step if you just want to run the dash app.
+**Note:** As the repository holds all the files created by running the script you can skip running the following command if you just want to run the dash app.
 ```
 bash run.sh
 ```
@@ -66,11 +69,13 @@ Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you
 ├── examples
 │   ├── src
 │   │   ├── dash_app.py
-│   │   └── ...
-│   ├── plotly_bow.html
+│   │   ├── preprocess_lyrics.py
+│   │   ├── scrape_songs.py
+│   │   └── text_space.py
 │   └── ...
 ├── TextSpace                                   <- Local python package
 │   ├── __init__.py
+│   ├── dash_application.py
 │   ├── data.py
 │   └── plot3D.py
 ├── .gitignore
