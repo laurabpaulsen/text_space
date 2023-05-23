@@ -34,7 +34,7 @@ bash setup.sh
 4. Run the `run.sh` script to: 
     - Scrape danish song lyrics from Genius
     - Preprocess the lyrics and prepare dataframe with appropriate columns for TextSpace
-    - Use TextSpace to create 3d visualization of the lyrics using BoW, GPT2, latent dirichlet allocation and emotion embeddings
+    - Use TextSpace to create 3d visualisation of the lyrics using BoW, GPT2, latent dirichlet allocation and emotion embeddings
 
 **Note:** As the repository holds all the files created by running the script you can skip running the following command if you just want to run the dash app.
 ```
@@ -54,9 +54,9 @@ If you want to display the embeddings of your own corpus, you can do so by simpl
 - author
 - text_full
 
-The `text_full` column should contain the full text of the document, while the `title` and `author` columns should contain the title and author of the document respectively. The `title` and `author` columns are used for labeling the documents in the visualization. The `text_full` column is used for calculating the embeddings. All columns should contain strings.
+The `text_full` column should contain the full text of the document, while the `title` and `author` columns should contain the title and author of the document respectively. The `title` and `author` columns are used for labelling the documents in the visualisation. The `text_full` column is used for calculating the embeddings. All columns should contain strings.
 
-Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you can both run `run.sh` or the `dash_app.py` script to visualize the embeddings of your own corpus.
+Place the dataframe in the `data` folder and name it "plotly_data.csv". Then you can both run `run.sh` or the `dash_app.py` script to visualise the embeddings of your own corpus.
 
 ## Repository structure
 ```
@@ -94,6 +94,4 @@ To display the results of the example functionality of the package using the dan
 - [BoW Embeddings](http://htmlpreview.github.io/?https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_bow.html)
 - [Latent dirichlet allocation](http://htmlpreview.github.io/??https://github.com/laurabpaulsen/text_space/blob/main/examples/plotly_topic.html)
 
-These can also be found in the `examples` folder of the repository. 
-
-Additionally the dash app provides an interactive way of exploring the corpus. It allows you to switch seemlessly between the types of embeddings and display the full text by clicking the songs. 
+These can also be found in the `examples` folder of the repository. Additionally the dash app provides an interactive way of exploring the corpus. It allows you to switch seamlessly between the types of embeddings and display the full text by clicking the songs. 
